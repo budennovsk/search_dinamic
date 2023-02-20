@@ -1,0 +1,98 @@
+.custom-checkbox {
+    width: 16px !important;
+    height: 16px !important;
+}
+.active-btn-store{
+    background-color: #747474;
+}
+.btn-fly{
+    padding: 0px !important;
+    width: 50px;
+    height: 50px;
+    transition: all .5s ease-in-out;
+}
+.btn-fly:hover{
+    opacity: .6;
+}
+.buy{
+    width: 100%;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #d7d7d7 !important;
+}
+
+#fly{
+    height: 50px;
+    width: 150px;
+    position: fixed;
+    z-index: 9999;
+    background-color: #2d2d2d;
+    border-radius: 7px;
+    overflow: hidden;
+    right: 12px;
+    bottom: 12px;
+    margin: auto;
+}
+#changer-fly {
+    height: 0px;
+    width: 50px;
+    position: fixed;
+    z-index: 9998;
+    background-color: #2d2d2d;
+    border-radius: 7px;
+    overflow: hidden;
+    right: 112px;
+    bottom: 65px;
+    margin: auto;
+    padding-bottom: 8px;
+    transition: all .5s ease-in-out;
+}
+.show-bases {
+    height: 310px !important;
+}
+#list{
+    visibility: hidden;
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+.table{
+    margin-top: -16px !important;
+}
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+#icon {
+    width: 16px;
+    height: 16px;
+}
+#icon-rft {
+    width: 30px;
+    height: 16px;
+}
+.header {
+    width: 100%;
+    background-color: #2d2d2d;
+    min-height: 50px;
+}
+.header span,.header select{
+    border-radius: 0px !important;
+}
+.header span{
+    width: 100px;
+    font-size: .7em;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.header .sec {
+    margin-top: -16px !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .header span,.header select {
+      width: 100%;
+    }
+  }
