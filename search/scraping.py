@@ -11,6 +11,7 @@ def get_scraping():
     if resp.status_code != 200:
         raise Exception('HTTP error access!')
 
+
     data_list = []
     html = resp.text
 
@@ -78,20 +79,20 @@ def get_scraping():
 
 
 
-        #
+
         #
         #
         # for i in soup.select('shops'):
         #     address = i.select_one('address').get_text().strip()
         #     data['address'] = address
         #     data_list.append(data)
-        #
-        #
-        #
+
+
+
         data_list.append(data)
         print(c,data)
-        c+=1
-        #
+        c += 1
+
         for item in data_list:
             if not Product.objects.filter(article=item['article']).exists():
                 Product.objects.create(
