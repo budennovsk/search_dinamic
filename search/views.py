@@ -39,3 +39,4 @@ def get(request):
 def restart(request):
     get_scraping()
     return redirect('search:all_scraping')
+

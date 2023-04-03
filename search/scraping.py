@@ -16,12 +16,11 @@ def get_scraping():
     soup = BeautifulSoup(html, 'xml')
     blocks = soup.select('tyre')
 
-    c = 0
     temp = []
-
+    id =0
     for block in blocks:
         data = {}
-
+        id +=1
         weight = block.select_one('w').get_text().strip()
         data['weight'] = weight
 
@@ -73,34 +72,25 @@ def get_scraping():
         title = data['brand'] + ' ' + data['model'] + ' ' + data['params']
         data['title'] = title
 
-
-
-        # for i in soup.select('shops'):
-        #     address = i.select_one('address').get_text().strip()
-        #     data['address'] = address
-        #     data_list.append(data)
-
         data_list.append(data)
-        # print(c, data)
-        # c += 1
-    for item in data_list:
         temp.append(Product(
-            weight=item['weight'],
-            heigth=item['heigth'],
-            radius=item['radius'],
-            brand=item['brand'],
-            model=item['model'],
-            season=item['season'],
-            spikes=item['spikes'],
-            article=item['article'],
-            count= item['count'] if item['count'] != '>60' else '0',
-            price=item['price'],
-            title=item['title'],
-            address=item['address'],
-            runflat=item['runflat'])
+            id=id,
+            weight=weight,
+            heigth=heigth,
+            radius=radius,
+            brand=brand,
+            model=model,
+            season=season,
+            spikes=spikes,
+            article=article,
+            count=count if count != '>60' else '0',
+            price=price,
+            title=title,
+            address=address,
+            runflat=runflat)
         )
-        if not Product.objects.filter(article=item['article']).exists():
-            Product.objects.bulk_create(temp, batch_size=999)
+    Product.objects.all().delete()
+    Product.objects.bulk_create(temp)
 
     # for item in data_list:
     #     if not Product.objects.filter(article=item['article']).exists():
@@ -120,7 +110,6 @@ def get_scraping():
     #             runflat=item['runflat']
     #
     #         )
-
 
 
 if __name__ == '__main__':

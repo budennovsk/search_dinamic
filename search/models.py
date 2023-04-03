@@ -24,7 +24,7 @@ class Product(models.Model):
     class Meta:
       ordering = ['-pk']
 
-    def __str__(self):
+    def __repr__(self):
         return f'{self.pk} - {self.brand} - {self.model} - {self.weight} - {self.heigth} - {self.radius}'
 
     def get_data(self):
