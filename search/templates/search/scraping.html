@@ -15,7 +15,12 @@
 
 </head>
 <body>
-
+<br>
+{% if user.is_active %}
+<form action="{% url 'search:restart' %}">
+    <button type="submit">Add BD</button>
+    {% endif %}
+</form>
 <br>
 <div class="header">
     <div class="input-group mb-3">

@@ -8,6 +8,7 @@ app_name = "search"
 
 urlpatterns = [
     path('', views.get, name='all_scraping'),
+    path('restart/', views.restart, name='restart'),
 
 ]
 

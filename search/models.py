@@ -21,9 +21,8 @@ class Product(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True)
     runflat = models.CharField(max_length=20, blank=True, null=True)
 
-
     class Meta:
-      ordering = ['pk']
+      ordering = ['-pk']
 
     def __str__(self):
         return f'{self.pk} - {self.brand} - {self.model} - {self.weight} - {self.heigth} - {self.radius}'

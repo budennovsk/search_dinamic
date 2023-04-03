@@ -2,7 +2,7 @@
 import json
 
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import Product
 from django.db.models import Q
@@ -11,8 +11,6 @@ from .scraping import get_scraping
 
 
 def get(request):
-    # вызов добавления базы данных SQL
-    # c = get_scraping()
 
     data = request.GET.get('data_p')
     if data is not None:
@@ -37,3 +35,7 @@ def get(request):
 
 
     return render(request, 'search\scraping.html')
+
+def restart(request):
+    get_scraping()
+    return redirect('search:all_scraping')
