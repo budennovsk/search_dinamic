@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 from .models import Product
 
 
-def get_scraping():
+def get_scraping() -> None:
+    """ Получение базы данных из xml с добавлением в БД """
     URL_SCRAPING = 'https://b2b.tyres.spb.ru/web/export/download?good_alias=tyre&file_key=ee4186d557daf057fe69620d68d720b0&format=xml'
     resp = requests.get(URL_SCRAPING)
     if resp.status_code != 200:
@@ -12,15 +13,15 @@ def get_scraping():
 
     data_list = []
     html = resp.text
-
+    # варим суп
     soup = BeautifulSoup(html, 'xml')
     blocks = soup.select('tyre')
-
+    # список словарей с информацией для записи в бд
     temp = []
-    id =0
+    id = 0
     for block in blocks:
         data = {}
-        id +=1
+        id += 1
         weight = block.select_one('w').get_text().strip()
         data['weight'] = weight
 
@@ -71,7 +72,7 @@ def get_scraping():
 
         title = data['brand'] + ' ' + data['model'] + ' ' + data['params']
         data['title'] = title
-
+        # будем добавлять в БД по 999 строк за один проход, чтобы сократить время на запись построчно
         data_list.append(data)
         temp.append(Product(
             id=id,
@@ -89,6 +90,7 @@ def get_scraping():
             address=address,
             runflat=runflat)
         )
+    # волшебный метод записи bulk_create погугли удивишься
     Product.objects.all().delete()
     Product.objects.bulk_create(temp)
 

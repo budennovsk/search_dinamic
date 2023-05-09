@@ -3,7 +3,7 @@ import csv
 import requests
 
 
-
+""" Создание из xml csv БД """
 LIST_XML = 'feel.xml'
 LIST_DATA = 'https://b2b.tyres.spb.ru/web/export/download?good_alias=tyre&file_key=ee4186d557daf057fe69620d68d720b0&format=xml'
 DATA_CSV = 'parse_xml_data.csv'
@@ -13,10 +13,11 @@ radius = []
 brand = []
 model = []
 
-def get_xml(load_url):
+def get_xml(load_url:str) -> None:
+
     response = requests.get(load_url)
-    with open('feel.xml', 'wb') as file:
-        file.write(response.content)
+    with open('feel.xml', 'w') as file:
+        file.write(response.text)
 
 
 def read(url):

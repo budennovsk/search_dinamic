@@ -2,13 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
+""" Создание из xml csv БД """
+
 url = 'https://b2b.tyres.spb.ru/web/export/download?good_alias=tyre&file_key=ee4186d557daf057fe69620d68d720b0&format=xml'
 
 DATA_CSV = 'data.csv'
+# запрос на адрес отправляем
 document = requests.get(url)
-
-soup = BeautifulSoup(document.content,"lxml")
-
+# варим суп
+soup = BeautifulSoup(document.content, "lxml")
+# запись результата
 weight = []
 height = []
 radius = []
@@ -16,8 +19,11 @@ brand = []
 model = []
 article = []
 
-def parse(cod):
+
+def parse(cod: str) -> None:
+    """ Создание результата в виде списков """
     xml = soup.find_all(cod)
+    # парсим xml через ds4
     for i in xml:
         c = i.get_text()
         if cod == 'w' and c not in weight:
@@ -34,13 +40,14 @@ def parse(cod):
             article.append(c)
 
 
-
-for i in ['w', 'h', 'd', 'brand','model', 'article']:
+for i in ['w', 'h', 'd', 'brand', 'model', 'article']:
     parse(i)
+
+
 # print(weight, height, radius,brand,model, sep = '\n')
 
-def create_csv():
-
+def create_csv() -> None:
+    """ Запись списков данных в CSV """
     with open(DATA_CSV, "w") as file:
         writer = csv.writer(file, delimiter=';', lineterminator="\n")
         writer.writerows(([weight, height, radius, sorted(brand), sorted(model), article]))
@@ -54,7 +61,3 @@ if __name__ == '__main__':
         print(ex)
     else:
         print('Скрипт выполнен')
-
-
-
-
