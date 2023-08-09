@@ -4,3 +4,4 @@ for i in range(10):
     f = i +2
     print(f)
     print('dd')
+fox = 11
